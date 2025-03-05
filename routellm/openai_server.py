@@ -13,17 +13,17 @@ from typing import AsyncGenerator, Dict, List, Literal, Optional, Union
 import fastapi
 import shortuuid
 import uvicorn
-import yaml
+import yaml     
 from fastapi.concurrency import asynccontextmanager
 from fastapi.responses import JSONResponse, StreamingResponse
 from openai import AsyncOpenAI
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field                     
 
 from routellm.controller import Controller, RoutingError
 from routellm.routers.routers import ROUTER_CLS
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-CONTROLLER = None
+CONTROLLER = None       
 
 openai_client = AsyncOpenAI()
 count = defaultdict(lambda: defaultdict(int))

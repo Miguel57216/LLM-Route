@@ -14,25 +14,25 @@ def get_embeddings(battles_df):
     battles_df = preprocess_battles(battles_df)
     print(f"Battles after preprocessing: {battles_df.shape[0]}")
     battles_df["first_turn"] = battles_df["prompt"].apply(
-        lambda s: json.loads(s)[0].strip()
+        lambda s: json.loads(s)[0].strip()   
     )
 
-    client = openai.OpenAI(
+    client = openai.OpenAI(     
         api_key=os.environ["OPENAI_API_KEY"], base_url="https://api.openai.com/v1"
     )
 
     batch_size = 2000
-    embeddings = []
+    embeddings = []                   
     user_prompts = battles_df["first_turn"].tolist()
 
     for i in tqdm.tqdm(range(0, len(user_prompts), batch_size)):
         battles = user_prompts[i : i + batch_size]
         responses = client.embeddings.create(
             input=battles, model="text-embedding-3-small"
-        ).data
+        ).data         
         embeddings.extend([data.embedding for data in responses])
     embeddings = torch.tensor(embeddings)
-    embeddings = embeddings.numpy()
+    embeddings = embeddings.numpy()             
 
     return embeddings
 
