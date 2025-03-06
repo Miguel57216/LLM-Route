@@ -139,23 +139,23 @@ class MTBench(Benchmark):
         self.routed_pair = routed_pair
 
         self.judgements = pd.read_json(
-            f"{CURRENT_DIR}/mt_bench/judgements.jsonl", lines=True
+            f"{CURRENT_DIR}/mt_bench/judgements.jsonl", lines=True       
         )
-        self.questions = pd.read_json(
+        self.questions = pd.read_json(    
             f"{CURRENT_DIR}/mt_bench/question.jsonl", lines=True
-        )
+        )    
         contaminated_prompts = pd.read_json(
             f"{CURRENT_DIR}/mt_bench/contaminated_prompts.jsonl", lines=True
         )["eval_prompt"].tolist()
 
         self.questions["turn1"] = self.questions["turns"].apply(lambda x: x[0])
         self.questions["turn2"] = self.questions["turns"].apply(lambda x: x[1])
-        self.questions = self.questions[
-            ~(
+        self.questions = self.questions[              
+            ~(   
                 self.questions["turn1"].isin(contaminated_prompts)
                 | self.questions["turn2"].isin(contaminated_prompts)
-            )
-        ]
+            )    
+        ]    
         print(f"{len(self.questions)} questions for MT bench after decontamination.")
 
         self.overwrite_cache = overwrite_cache

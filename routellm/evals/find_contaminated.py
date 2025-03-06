@@ -42,15 +42,15 @@ def check_data_contamination_similarity(train_embeddings, eval_prompts):
     return contaminated_prompts
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":             
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser()           
     parser.add_argument(
-        "--benchmark",
-        type=str,
+        "--benchmark",    
+        type=str,     
         choices=["mt-bench", "mmlu", "gsm8k"],
     )
-    parser.add_argument(
+    parser.add_argument(   
         "--output",
         type=str,
     )
