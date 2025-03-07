@@ -13,17 +13,17 @@ from routellm.routers.matrix_factorization.model import MODEL_IDS
 
 torch.manual_seed(42)
 np.random.seed(42)
-random.seed(42)
+random.seed(42)   
 
 
-class PairwiseDataset(Dataset):
+class PairwiseDataset(Dataset):   
     def __init__(self, data):
         self.models_a = torch.tensor(
             [MODEL_IDS[sample["model_a"]] for sample in data], dtype=torch.int64
-        )
+        )  
         self.models_b = torch.tensor(
             [MODEL_IDS[sample["model_b"]] for sample in data], dtype=torch.int64
-        )
+        )  
         self.prompt_id = [sample["idx"] for sample in data]
         self.winners = [sample["winner"] for sample in data]
 
